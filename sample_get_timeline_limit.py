@@ -1,4 +1,5 @@
 from requests_oauthlib import OAuth1Session
+import datetime
 
 if __name__ == '__main__':
     CK = 'XXXXXXXXXXXXXXXXXXXXXX'                             # Consumer Key
@@ -21,6 +22,6 @@ if __name__ == '__main__':
         limit = req.headers['x-rate-limit-remaining']   # API残り
         reset = req.headers['x-rate-limit-reset']       # API制限の更新時刻 (UNIX time)
         print ("API remain: " + limit)
-        print ("API reset: " + reset)
+        print ("API reset: " + datetime.datetime.fromtimestamp(reset))
     else:
         print ("Error: %d" % req.status_code)
