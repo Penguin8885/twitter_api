@@ -21,7 +21,8 @@ if __name__ == '__main__':
     if req.status_code == 200:
         limit = req.headers['x-rate-limit-remaining']   # API残り
         reset = req.headers['x-rate-limit-reset']       # API制限の更新時刻 (UNIX time)
+        reset_time = str(datetime.datetime.fromtimestamp(int(reset)))
         print ("API remain: " + limit)
-        print ("API reset: " + datetime.datetime.fromtimestamp(reset))
+        print ("API reset: " + reset_time)
     else:
         print ("Error: %d" % req.status_code)
