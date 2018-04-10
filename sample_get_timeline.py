@@ -1,5 +1,6 @@
 from requests_oauthlib import OAuth1Session
 import json
+import datetime
 
 if __name__ == '__main__':
     CK = 'XXXXXXXXXXXXXXXXXXXXXX'                             # Consumer Key
@@ -19,6 +20,12 @@ if __name__ == '__main__':
 
     # レスポンスを確認
     if req.status_code == 200:
+        limit = req.headers['x-rate-limit-remaining']   # API残り
+        reset = req.headers['x-rate-limit-reset']       # API制限の更新時刻 (UNIX time)
+        reset_time = str(datetime.datetime.fromtimestamp(int(reset)))
+        print ("API remain: " + limit)
+        print ("API reset: " + reset_time)
+
         timeline = json.loads(req.text)
         for tweet in timeline:
             print(tweet["text"])
