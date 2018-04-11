@@ -18,7 +18,7 @@ class ReplyBot:
     # botの作業を開始するメソッド
     def start(self):
         # OAuthでTwitterに接続
-        twitter = OAuth1Session(CK, CS, AT, AS)
+        twitter = OAuth1Session(self.CK, self.CS, self.AT, self.AS)
         req = twitter.post(self.userstream_url, params={}, stream=True)
 
         # 接続エラー
@@ -91,7 +91,7 @@ class ReplyBot:
 
         # Twitterに接続してPOST
         print('######## ' + str(datetime.datetime.now()) + ' ########')
-        twitter = OAuth1Session(CK, CS, AT, AS)
+        twitter = OAuth1Session(self.CK, self.CS, self.AT, self.AS)
         params = {'status': tweet, 'in_reply_to_status_id': stream_js['id']}
         req = twitter.post(self.post_url, params=params)
 
